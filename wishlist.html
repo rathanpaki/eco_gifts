@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+        color: #333;
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .container:hover {
+        transform: scale(1.02);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        color: #4caf50;
+      }
+      .wishlist-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s;
+      }
+      .wishlist-item:hover {
+        background: #f9f9f9;
+      }
+      .wishlist-item img {
+        width: 100px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+      }
+      .wishlist-item img:hover {
+        transform: scale(1.1);
+      }
+      .wishlist-item-details {
+        flex: 1;
+        margin-left: 20px;
+      }
+      .wishlist-item-details h2 {
+        margin: 0;
+        font-size: 1.5em;
+        color: #333;
+      }
+      .wishlist-item-details p {
+        margin: 5px 0;
+        color: #777;
+      }
+      .wishlist-item button {
+        padding: 10px 20px;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        background: #4caf50;
+        color: white;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .wishlist-item button:hover {
+        background: #45a049;
+        transform: scale(1.05);
+      }
+      .view-btn {
+        background: #2196f3;
+        color: white;
+      }
+      .view-btn:hover {
+        background: #1976d2;
+        transform: scale(1.05);
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+          alert("Please log in to view your wishlist.");
+          window.location.href = "login.html";
+          return;
+        }
+
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const container = document.querySelector(".container");
+
+        wishlist.forEach((product) => {
+          const wishlistItem = document.createElement("div");
+          wishlistItem.className = "wishlist-item";
+          wishlistItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" />
+            <div class="wishlist-item-details">
+              <h2>${product.name}</h2>
+              <p>LKR ${product.price.toFixed(2)}</p>
+            </div>
+            <button class="view-btn" onclick="window.location.href='productDetails.html?id=${
+              product.id
+            }'">View</button>
+            <button onclick="removeFromWishlist(${product.id})">Remove</button>
+          `;
+          container.appendChild(wishlistItem);
+        });
+      });
+
+      function removeFromWishlist(productId) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist = wishlist.filter((product) => product.id !== productId);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        location.reload();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>My Wishlist</h1>
+      <!-- Wishlist items will be dynamically added here -->
+    </div>
+  </body>
+</html>

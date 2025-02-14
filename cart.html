@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        color: #333;
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+      }
+      .container:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s;
+      }
+      .cart-item:hover {
+        background: #f9f9f9;
+      }
+      .cart-item img {
+        width: 100px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+      }
+      .cart-item img:hover {
+        transform: scale(1.1);
+      }
+      .cart-item-details {
+        flex: 1;
+        margin-left: 20px;
+      }
+      .cart-item-details h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+      .cart-item-details p {
+        margin: 5px 0;
+      }
+      .cart-item button {
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        background: #f44336;
+        color: white;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .cart-item button:hover {
+        background: #e53935;
+        transform: scale(1.05);
+      }
+      .total {
+        text-align: right;
+        margin-top: 20px;
+        font-size: 24px;
+      }
+      .checkout-btn {
+        display: block;
+        width: 200px;
+        margin-left: 700px;
+        padding: 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        background: #4caf50;
+        color: white;
+        font-size: 18px;
+        transition: background 0.3s, transform 0.3s;
+        margin-top: 20px;
+      }
+      .checkout-btn:hover {
+        background: #45a049;
+        transform: scale(1.05);
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const container = document.querySelector(".container");
+        const totalElement = document.querySelector(".total p");
+        let total = 0;
+
+        cart.forEach((product) => {
+          const cartItem = document.createElement("div");
+          cartItem.className = "cart-item";
+          cartItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" />
+            <div class="cart-item-details">
+              <h2>${product.name}</h2>
+              <p>LKR ${product.price.toFixed(2)}</p>
+            </div>
+            <button onclick="removeFromCart(${product.id})">Remove</button>
+          `;
+          container.insertBefore(cartItem, totalElement.parentElement);
+          total += product.price;
+        });
+
+        totalElement.textContent = `Total: LKR ${total.toFixed(2)}`;
+      });
+
+      function removeFromCart(productId) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart = cart.filter((product) => product.id !== productId);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.reload();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shopping Cart</h1>
+      <!-- Cart items will be dynamically added here -->
+      <div class="total">
+        <p>Total: LKR 0.00</p>
+      </div>
+      <button class="checkout-btn" onclick="location.href='checkout.html'">
+        Proceed to Checkout
+      </button>
+    </div>
+  </body>
+</html>

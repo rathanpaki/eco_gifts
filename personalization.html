@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personalize Your Gift - EcoGifts</title>
+    <link rel="stylesheet" href="assets/css/index.css" />
+    <link rel="stylesheet" href="assets/css/personalization.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="logo" href="index.html"><img src="assets/img/logo.jpg" /></a>
+        <ul class="nav-links">
+          <li><a href="productList.html">Shop</a></li>
+          <li><a href="personalization.html">Personalization</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Personalization Section -->
+    <div class="personalization-container">
+      <!-- Personalization Form -->
+      <section class="personalization">
+        <h2>Personalize Your Gift</h2>
+        <form action="submitPersonalization.html" method="post">
+          <label for="giftType">Select Gift Type:</label>
+          <select id="giftType" name="giftType">
+            <option value="candle">Eco-friendly Candle</option>
+            <option value="bag">Reusable Bag</option>
+            <option value="bottle">Water Bottle</option>
+          </select>
+
+          <label for="message">Personalized Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Enter your message here..."
+          ></textarea>
+
+          <label for="color">Select Color:</label>
+          <input type="color" id="color" name="color" value="#4caf50" />
+
+          <label for="fontStyle">Select Font Style:</label>
+          <select id="fontStyle" name="fontStyle">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+
+          <label for="fontSize">Select Font Size:</label>
+          <input
+            type="number"
+            id="fontSize"
+            name="fontSize"
+            min="10"
+            max="36"
+            value="14"
+          />
+
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </section>
+
+      <!-- Canvas Container -->
+      <div class="canvas-container">
+        <h3>Customize Your Design</h3>
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <br />
+        <label for="canvasColor">Choose Drawing Color:</label>
+        <input
+          type="color"
+          id="canvasColor"
+          name="canvasColor"
+          value="#333"
+          onchange="setColor(this.value)"
+        />
+        <br />
+        <label for="canvasText">Enter Text:</label>
+        <input
+          type="text"
+          id="canvasText"
+          name="canvasText"
+          value="Hello"
+          oninput="setText(this.value)"
+        />
+        <br />
+        <button type="button" class="btn" onclick="setShape('freehand')">
+          Freehand
+        </button>
+        <button type="button" class="btn" onclick="setShape('rectangle')">
+          Rectangle
+        </button>
+        <button type="button" class="btn" onclick="setShape('circle')">
+          Circle
+        </button>
+        <button type="button" class="btn" onclick="setShape('text')">
+          Text
+        </button>
+        <button type="button" class="btn" onclick="clearCanvas()">
+          Clear Canvas
+        </button>
+      </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/canvasEditor.js"></script>
+  </body>
+</html>

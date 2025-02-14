@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        color: #333;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .gallery {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .gallery img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+      .gallery img.zoom {
+        cursor: zoom-in;
+      }
+      .gallery img.zoomed {
+        transform: scale(2);
+        cursor: zoom-out;
+      }
+      .details {
+        text-align: left;
+      }
+      .details h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+      .details p {
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+      .price {
+        font-size: 24px;
+        color: #4caf50;
+        margin: 10px 0;
+      }
+      .buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        margin-left: 300px;
+      }
+      .buttons button {
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .cart-btn {
+        background: #4caf50;
+        color: white;
+      }
+      .cart-btn:hover {
+        background: #45a049;
+        transform: scale(1.05);
+      }
+      .wishlist-btn {
+        background: #388e3c;
+        color: white;
+      }
+      .wishlist-btn:hover {
+        background: #2e7d32;
+        transform: scale(1.05);
+      }
+      .customize-btn {
+        background: #2e7d32;
+        color: black;
+        color: white;
+      }
+      .customize-btn:hover {
+        background: yellowgreen;
+        color: black;
+        transform: scale(1.05);
+      }
+      a {
+        color: #4caf50;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      a:hover {
+        color: #388e3c;
+      }
+      .ar-preview {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .ar-preview button {
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        background: #ff9800;
+        color: white;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .ar-preview button:hover {
+        background: #fb8c00;
+        transform: scale(1.05);
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get("id");
+        if (productId) {
+          fetch("assets/data/product.json")
+            .then((response) => response.json())
+            .then((products) => {
+              const product = products.find((p) => p.id == productId);
+              if (product) {
+                document.getElementById("product-img").src = product.image;
+                document.getElementById("product-title").textContent =
+                  product.name;
+                document.getElementById("product-description").textContent =
+                  product.description;
+                document.getElementById(
+                  "product-price"
+                ).textContent = `lkr ${product.price.toFixed(2)}`;
+
+                document
+                  .querySelector(".cart-btn")
+                  .addEventListener("click", function () {
+                    addToCart(product);
+                  });
+                document
+                  .querySelector(".wishlist-btn")
+                  .addEventListener("click", function () {
+                    addToWishlist(product);
+                  });
+              }
+            })
+            .catch((error) =>
+              console.error("Error loading product details:", error)
+            );
+        }
+        const productImg = document.getElementById("product-img");
+        productImg.addEventListener("click", function () {
+          if (productImg.classList.contains("zoomed")) {
+            productImg.classList.remove("zoomed");
+          } else {
+            productImg.classList.add("zoomed");
+          }
+        });
+      });
+
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Product added to cart!");
+      }
+
+      function addToWishlist(product) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.push(product);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Product added to wishlist!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="gallery">
+        <img
+          id="product-img"
+          class="zoom"
+          src="product.jpg"
+          alt="Product Image"
+        />
+        <div id="360-view">
+          <!-- Placeholder for 360° view -->
+          <p>360° View Coming Soon</p>
+        </div>
+      </div>
+      <div class="details">
+        <h2 id="product-title">Eco-Friendly Handmade Bag</h2>
+        <p id="product-description">
+          Stylish and sustainable, crafted from biodegradable materials.
+        </p>
+        <p class="price" id="product-price">LKR 3,500</p>
+        <p>
+          <strong>Material:</strong>
+          <span id="product-material">Organic Cotton</span>
+        </p>
+        <p>
+          <strong>Sustainability Score:</strong>
+          <span id="product-sustainability"
+            >CO2 Savings: 75%, Biodegradability: 90%</span
+          >
+        </p>
+        <p>
+          <strong>Seller:</strong>
+          <span id="product-seller">Local Artisan - Tharushi Creations</span>
+        </p>
+        <div class="buttons">
+          <button class="cart-btn">Add to Cart</button>
+          <button class="wishlist-btn">Add to Wishlist</button>
+          <button
+            class="customize-btn"
+            onclick="window.location.href='customize.html'"
+          >
+            Customize Product
+          </button>
+          <div class="ar-preview">
+            <button onclick="alert('WebAR Preview Coming Soon!')">
+              View in AR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

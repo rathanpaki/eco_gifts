@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoGifts - Contact Us</title>
+    <link rel="stylesheet" href="assets/css/contact.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="logo" href="index.html"><img src="assets/img/logo.jpg" /></a>
+        <ul class="nav-links">
+          <li><a href="productList.html">Shop</a></li>
+          <li><a href="personalization.html">Personalization</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form">
+      <h1>Contact Us</h1>
+      <form action="submit_form.php" method="post" id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="faq.html">FAQs</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="https://www.facebook.com/ecogifts" target="_blank">Facebook</a>
+        <a href="https://www.twitter.com/ecogifts" target="_blank">Twitter</a>
+      </div>
+      <div class="newsletter">
+        <h3>Subscribe to our Newsletter</h3>
+        <input type="email" placeholder="Enter your email" />
+        <button>Subscribe</button>
+      </div>
+      <p>EcoGifts &copy; 2025 - Sustainable Gifting</p>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/contact.js"></script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoGifts - Product Listings</title>
+    <link rel="stylesheet" href="assets/css/List.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="logo" href="index.html"><img src="assets/img/logo.jpg" /></a>
+        <ul class="nav-links">
+          <li><a href="productList.html">Shop</a></li>
+          <li><a href="personalization.html">Personalization</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
+        </ul>
+        <div class="filter-icon" onclick="toggleFilterOptions()">
+          <img src="assets/img/filter.png" alt="Filter Icon" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- Filters -->
+    <section class="filters" id="filter-options">
+      <h2>Filter by:</h2>
+      <div class="filter-options">
+        <label
+          >Category:
+          <select>
+            <option>All</option>
+            <option>Biodegradable</option>
+            <option>Eco-friendly</option>
+            <option>Personalized</option>
+            <option>Recycled</option>
+            <option>Nature-Inspired</option>
+          </select>
+        </label>
+        <label
+          >Material:
+          <select class="material-filter">
+            <option>All</option>
+            <option>Biodegradable</option>
+            <option>Handmade</option>
+            <option>Plant-Based</option>
+          </select>
+        </label>
+        <label
+          >Price Range:
+          <input
+            type="range"
+            min="800"
+            max="6000"
+            step="10"
+            value="500"
+            id="price-range"
+          />
+          <span id="price-value">lkr 500</span>
+        </label>
+        <label
+          >Popularity:
+          <select class="popularity-filter">
+            <option>All</option>
+            <option>Bestsellers</option>
+            <option>New Arrivals</option>
+          </select>
+        </label>
+        <label
+          >Sort By:
+          <select>
+            <option>Alphabetical</option>
+            <option>Price Low-High</option>
+            <option>Customer Ratings</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+      <h1
+        class="title"
+        style="color: #388e3c; text-align: center; font-size: 2rem"
+      >
+        Our Products
+      </h1>
+      <div class="product-grid" id="product-grid">
+        <!-- Product Cards will be generated here -->
+      </div>
+    </main>
+
+    <script src="assets/js/list.js"></script>
+    <script src="assets/js/productLoader.js"></script>
+    <script>
+      function toggleFilterOptions() {
+        const filterOptions = document.getElementById("filter-options");
+        filterOptions.style.display =
+          filterOptions.style.display === "none" ? "block" : "none";
+      }
+
+      document
+        .getElementById("price-range")
+        .addEventListener("input", function () {
+          document.getElementById(
+            "price-value"
+          ).textContent = `lkr ${this.value}`;
+        });
+
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Product added to cart!");
+      }
+
+      function addToWishlist(product) {
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        wishlist.push(product);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Product added to wishlist!");
+      }
+
+      // Filter products based on selected criteria
+      function filterProducts() {
+        const category = document.querySelector("select").value;
+        const material = document.querySelector(".material-filter").value;
+        const price = document.getElementById("price-range").value;
+        const popularity = document.querySelector(".popularity-filter").value;
+
+        const products = document.querySelectorAll(".product-card");
+        products.forEach((product) => {
+          const productCategory = product.dataset.badge;
+          const productMaterial = product.dataset.material;
+          const productPrice = product.dataset.price;
+          const productPopularity = product.dataset.popularity;
+
+          if (
+            (category === "All" || productCategory === badge) &&
+            (material === "All" || productMaterial === material) &&
+            productPrice <= price &&
+            (popularity === "All" || productPopularity === popularity)
+          ) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      // Add event listeners to filter options
+      document
+        .querySelector("select")
+        .addEventListener("change", filterProducts);
+      document
+        .querySelector(".material-filter")
+        .addEventListener("change", filterProducts);
+      document
+        .getElementById("price-range")
+        .addEventListener("input", filterProducts);
+      document
+        .querySelector(".popularity-filter")
+        .addEventListener("change", filterProducts);
+    </script>
+  </body>
+</html>

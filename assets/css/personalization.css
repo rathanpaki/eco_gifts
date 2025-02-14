@@ -103,3 +103,19 @@ body {
   margin: 10px auto;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .personalization-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .personalization {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .canvas-container {
+    margin-top: 20px;
+  }
+}

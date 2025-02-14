@@ -102,3 +102,22 @@ body {
 .register-form a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .register-container {
+    height: auto;
+    padding: 20px;
+  }
+
+  .register-form {
+    width: 100%;
+  }
+
+  .register-form input {
+    width: 100%;
+  }
+}

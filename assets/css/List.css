@@ -388,3 +388,18 @@ body {
   width: 300px;
   margin-left: 350px;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .filters {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}

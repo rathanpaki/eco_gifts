@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcoGifts - Product Listings</title>
     <link rel="stylesheet" href="assets/css/List.css" />
+    <link rel="stylesheet" href="assets/css/navbar.css" />
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar">
       <div class="container">
         <a class="logo" href="index.html"><img src="assets/img/logo.jpg" /></a>
-        <ul class="nav-links">
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav-links" id="nav-links">
           <li><a href="productList.html">Shop</a></li>
           <li><a href="personalization.html">Personalization</a></li>
           <li><a href="contact.html">Contact Us</a></li>
@@ -95,6 +101,7 @@
 
     <script src="assets/js/list.js"></script>
     <script src="assets/js/productLoader.js"></script>
+    <script src="assets/js/navbar.js"></script>
     <script>
       function toggleFilterOptions() {
         const filterOptions = document.getElementById("filter-options");

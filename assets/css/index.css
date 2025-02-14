@@ -308,3 +308,26 @@ footer:hover {
 .newsletter button:hover {
   background-color: #388e3c;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .hero {
+    height: auto;
+    padding: 20px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}

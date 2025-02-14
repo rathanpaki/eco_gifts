@@ -103,3 +103,22 @@ body {
 .login-form a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .login-container {
+    height: auto;
+    padding: 20px;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+
+  .login-form input {
+    width: 100%;
+  }
+}

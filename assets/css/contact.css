@@ -195,3 +195,19 @@ footer:hover {
   background-color: #388e3c;
   transform: translateY(-3px);
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .contact-form form {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+  }
+}

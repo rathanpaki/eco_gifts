@@ -208,6 +208,6 @@ footer:hover {
 
   .contact-form input,
   .contact-form textarea {
-    width: 100%;
+    width: auto;
   }
 }
